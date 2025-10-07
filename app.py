@@ -20,7 +20,7 @@ def load_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Load the CSS file at the beginning of the script
-load_css("styles/style.css")
+load_css("style.css")
 
 # ---------------- Creative Sidebar ----------------
 daily_verses = [
@@ -113,4 +113,5 @@ st.text_input(
     placeholder="Ask your Bible Companion",
     key="user_input",
     on_change=handle_input
+
 )
