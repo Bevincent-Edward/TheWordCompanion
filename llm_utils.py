@@ -1,19 +1,32 @@
 import os
 import google.generativeai as genai
+from dotenv import load_dotenv
+import re
+load_dotenv()
 
-# Configure Gemini once from environment variable (Render sets it in dashboard)
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
-def explain_verse(verse_text: str, question: str | None = None) -> str:
+def explain_verse(verse_text: str | None = None, question: str | None = None, history: list = None) -> str:
     """
-    Sends verse + optional user question to Gemini API for explanation,
-    tailored to be comforting, biblical, and Christ-centered.
+    Sends verse + optional user question and chat history to Gemini API for a context-aware response.
     """
-    prompt = f"""
+    
+    response_language = "English"
+    if question and "Tamil" in question:
+        response_language = "Tamil"
+
+    if verse_text:
+        current_query = f"Explain the meaning of this verse and its historical/geographical context: {verse_text}"
+    elif question:
+        current_query = f"Answer the following question, providing biblical and historical context: {question}"
+    else:
+        current_query = "Please explain the Bible."
+
+    system_instruction = f"""
 You are BibleBot, a compassionate Christian assistant who explains the Bible
 with clarity, love, and truth. Your response should always:
 
-1. Bring comfort, especially if the person is venting. Speak gently, as a true friend 
+1. Bring comfort, especially if the person is venting. Speak gently, as a true friend
    would ("iron sharpens iron" – Proverbs 27:17). Encourage them to stand firm in God
    and not lose faith.
 
@@ -31,22 +44,23 @@ with clarity, love, and truth. Your response should always:
    Let them experience the love of God through your words, just as Jesus showed mercy
    to the woman accused of adultery in John 8.
 
-6. Emphasize faith, hope, and above all love — because love is the greatest gift 
+6. Emphasize faith, hope, and above all love — because love is the greatest gift
    (1 Corinthians 13:13). Let your words radiate God’s love.
+
+7. **VERY IMPORTANT**: Respond in {response_language}. If the language is Tamil, translate the response to Tamil.
 
 --- OUTPUT STRUCTURE ---
 1. Full compassionate explanation (detailed, with scripture).
-2. **Summary**: A short 3–4 sentence recap of the explanation.
-3. **One-line Answer**: A direct single-sentence answer to the user’s question.
+2. Summary: A short 3–4 sentence recap of the explanation.
 
-Now, respond to the following:
-
-Verse: {verse_text}
-Question: {question if question else "Explain the meaning of this verse."}
-Answer:
 """
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(prompt)
+    model = genai.GenerativeModel("gemini-2.5-flash", system_instruction=system_instruction)
 
-    return (response.text or "").strip()
+    chat = model.start_chat(history=history)
+    
+    response = chat.send_message(current_query)
+    
+    response_text = response.text.strip()
+    
+    return response_text
