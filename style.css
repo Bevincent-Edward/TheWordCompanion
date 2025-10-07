@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
+
+/* Dynamic Background Animation */
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(-45deg, #f9e1c2, #f3d4bf, #f4e8d3, #e8d9c5);
+    background-size: 400% 400%;
+    animation: gradient-animation 15s ease infinite;
+    font-family: 'Open Sans', sans-serif;
+    color: #2d2d2d;
+    position: relative;
+}
+
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/79/Christian_cross.svg') no-repeat center;
+    background-size: 250px;
+    opacity: 0.06;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar Styles - Go Full Crazy Creative Mode */
+section[data-testid="stSidebar"] {
+    background: #ffffff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-right: none;
+    padding-top: 2rem;
+}
+
+/* Sidebar Text and Icon Color */
+[data-testid="stSidebar"] h2, 
+[data-testid="stSidebar"] h3, 
+[data-testid="stSidebar"] h4,
+[data-testid="stSidebar"] div,
+[data-testid="stSidebar"] p {
+    color: #4b2e2e !important;
+}
+
+/* Enhanced Dividers */
+[data-testid="stSidebar"] .st-emotion-cache-121p6b5:nth-child(even) > div > hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px dashed #a0522d;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* Updated font for headers */
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #4b2e2e !important;
+    text-align: center;
+    font-size: 2.7em;
+    margin-bottom: 15px;
+}
+h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: #4b2e2e !important;
+}
+
+.chat-user {
+    background-color: #edf2fb;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    text-align: right;
+    border: 1px solid #c8d6e5;
+}
+.chat-bot {
+    background-color: #fff8e7;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    border: 1px solid #e0c097;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+}
+.creative-prompt {
+    text-align: center;
+    font-size: 2.2em;
+    font-family: 'Sacramento', cursive;
+    color: #a0522d;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    margin-top: 150px;
+}
+
+/* Final Message Styling */
+.stSidebar > .st-emotion-cache-1c0029b > div:last-child p {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.1em !important;
+    font-style: italic !important;
+    text-align: center !important;
+    color: #4b2e2e !important;
+    opacity: 0.8;
+}
+
+/* This is the new, single style for the input container */
+div[data-testid="stTextInput"] > div:first-child > div:first-child {
+    background: #fff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+div[data-testid="stTextInput"] > div:first-child > div:first-child:focus-within {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 0 8px rgba(0,0,0,0.1);
+}
+.stTextInput input {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #333 !important;
+}
+.stTextInput label {
+    display: none !important;
+}
