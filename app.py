@@ -44,7 +44,6 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### A Heavenly Reminder ❤️ ")
 st.sidebar.markdown("Jesus loves you. He died for your sins and rose on the third day. Repent, for the Kingdom of Heaven is near.")
 
-st.sidebar.markdown("---")
 st.sidebar.info("💡 *Ask me about any Bible verse or a topic. I'll explain with love and scripture.*")
 st.sidebar.caption("Developed by Bevin, A Servant of God")
 
@@ -115,3 +114,4 @@ st.text_input(
     on_change=handle_input
 
 )
+
